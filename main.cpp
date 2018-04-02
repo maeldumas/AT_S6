@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -9,6 +10,9 @@ int overlap(string, string);
 int overlap_naif(string, string);
 void overlap_graph_naif(vector<string>&, int&, vector<vector<int> >&);
 void overlap_graph(vector<string>&, int&, vector<vector<int> >&);
+vector<int> TSP_naif(vector<vector<int> >&, int);
+string SSP(vector<vector<int> >&,vector<int>&, vector<string>&, int);
+
 
 int main(int argc, char** argv){
   /*string s1, s2;
@@ -31,6 +35,10 @@ int main(int argc, char** argv){
   overlap_graph(F,n,T);
   afficheMatrice(T,n);
   //afficheMatrice_dot(T,n,F,"graph.dot");
-  
+  vector<int> TSP;
+  string S;
+  TSP=TSP_naif(T,n);
+  S=SSP(T,TSP,F,n);
+  cout<<S<<endl;
   return 0;
 }

@@ -90,7 +90,7 @@ void overlap_graph_naif(vector<string> &F, int &n, vector<vector<int> > &T){
     }
   }
 }
-//version qui va supprimer les sommets entièrement recouvert par d'autres sommets (compléxité en temps plus grande que la version naïve, car nécessite des opérations supplémentaires)
+//version qui va supprimer les sommets entièrement recouvert par d'autres sommets
 void overlap_graph(vector<string> &F, int &n, vector<vector<int> > &T){
   int i,j,nt,it,jt;
   vector<bool> overlaped(n);
