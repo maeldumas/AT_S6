@@ -108,9 +108,20 @@ void test_2(){
   cout<<S<<endl;
 }
 
+void iter(int ens, int nextelement, vector<vector<int> > &T, int n, int size_set){
+  // cout<<"ens :"<<ens<<", nextelement :"<<nextelement<<", n"<<n<<", size_set :"<<size_set<<endl;
+  if(nextelement<n){
+    int enst=ens+(1<<nextelement);
+    T[size_set].push_back(enst);
+    iter(enst, nextelement+1,T,n,size_set+1);
+    iter(ens, nextelement+1,T,n,size_set);
+  }
+}
+  
+  
 
 void test_rpz(){
-  int n,ens=0;
+  /* int n,ens=0;
   bool b;
   cout<<"entrez la taille de votre ensemble :"<<endl;
   cin>>n;
@@ -121,9 +132,19 @@ void test_rpz(){
   }
   for(int i=0; i<n; i++){
     cout<<i<<((ens>>i)&1?"est":"n'est pas")<<" dans votre ensemble"<<endl;
+    }*/
+  int n;
+  cout<<"entrez la taille de votre ensemble :"<<endl;
+  cin>>n;
+  vector<vector<int> > T(n);
+  iter(0,0,T,n,0);
+  cout<<"Affichage de tous les ensemble (codé) :"<<endl;
+  for(int i=0;i<n;i++){
+    for(int j=0; j<T[i].size();j++)
+      cout<<T[i][j]<<' ';
+    cout<<endl;
   }
-    
- 
+
 }
   
     
