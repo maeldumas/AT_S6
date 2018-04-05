@@ -16,7 +16,7 @@ vector<int> TSP_naif(vector<vector<int> >&, int);
 string SSP(vector<vector<int> >&,vector<int>&, vector<string>&, int);
 void test_1();
 void test_2();
-
+void test_rpz();
 
 int main(int argc, char** argv){
   /*string s1, s2;
@@ -24,8 +24,9 @@ int main(int argc, char** argv){
     cin>>s1>>s2;
     cout<<overlap(s1,s2)<<endl;*/
   //test_1();
-  srand(time(NULL));
-  test_2();
+  //srand(time(NULL));
+  // test_2();
+  test_rpz();
   return 0;
 }
 
@@ -94,8 +95,8 @@ void test_2(){
   w=clock()-t;
   cout<<"fin de la création du graphe de chevauchement, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<"\n";
   cout<<"Le graphe de chevauchement est de taille : "<<n<<endl;
-  //afficheMatrice(T,n);
-  //afficheMatrice_dot(T,n,F,"graph.dot");
+  afficheMatrice(T,n);
+  // afficheMatrice_dot(T,n,F,"graph.dot");
 
   //Execution du TSP naïf sur la grahe T
   vector<int> TSP;
@@ -106,4 +107,23 @@ void test_2(){
   S=SSP(T,TSP,F,n);
   cout<<S<<endl;
 }
+
+
+void test_rpz(){
+  int n,ens=0;
+  bool b;
+  cout<<"entrez la taille de votre ensemble :"<<endl;
+  cin>>n;
+  for(int i=0; i<n; i++){
+    cout<<i<<" est-il dans votre ensemble ?"<<endl;
+    cin>>b;
+    ens+=b?1<<i:0;
+  }
+  for(int i=0; i<n; i++){
+    cout<<i<<((ens>>i)&1?"est":"n'est pas")<<" dans votre ensemble"<<endl;
+  }
+    
+ 
+}
   
+    
