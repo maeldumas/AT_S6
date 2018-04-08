@@ -4,6 +4,7 @@
 #include <time.h>
 #include <cstdlib>
 
+
 using namespace std;
 
 void afficheMatrice(vector<vector<int> >, int);
@@ -14,9 +15,12 @@ void overlap_graph_naif(vector<string>&, int&, vector<vector<int> >&);
 void overlap_graph(vector<string>&, int&, vector<vector<int> >&);
 vector<int> TSP_naif(vector<vector<int> >&, int);
 string SSP(vector<vector<int> >&,vector<int>&, vector<string>&, int);
+int SSP_int(vector<vector<int> >&,vector<int>&, vector<string>&, int);
+int TSP_DP1(vector<vector<int> >&, int);
+vector<int> TSP_DP2(vector<vector<int> >&, int);
 void test_1();
 void test_2();
-
+void test_rpz();
 
 int main(int argc, char** argv){
   /*string s1, s2;
@@ -26,6 +30,7 @@ int main(int argc, char** argv){
   //test_1();
   srand(time(NULL));
   test_2();
+  //test_rpz();
   return 0;
 }
 
@@ -48,10 +53,14 @@ void test_1(){
   //afficheMatrice_dot(T,n,F,"graph.dot");
   vector<int> TSP;
   string S;
-  TSP=TSP_naif(T,n);
+   TSP=TSP_naif(T,n);
   S=SSP(T,TSP,F,n);
   cout<<S<<endl;
+  cout<<"taille max : "<<SSP_int(T,TSP,F,n)<<endl;
+  cout<<"taille max avec TSP_DP1 :"<<TSP_DP1(T,n)<<endl;
 }
+
+
 
 void test_2(){
   int n, inf, sup, tn, k, i ,j;
@@ -94,16 +103,77 @@ void test_2(){
   w=clock()-t;
   cout<<"fin de la création du graphe de chevauchement, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<"\n";
   cout<<"Le graphe de chevauchement est de taille : "<<n<<endl;
-  //afficheMatrice(T,n);
-  //afficheMatrice_dot(T,n,F,"graph.dot");
+  afficheMatrice(T,n);
+  // afficheMatrice_dot(T,n,F,"graph.dot");
 
-  //Execution du TSP naïf sur la grahe T
   vector<int> TSP;
-  t=clock();
+  
+  //Execution du TSP naïf sur la grahe T 
+   /*   t=clock();
   TSP=TSP_naif(T,n);
   w=clock()-t;
   cout<<"fin de l'éxécution du TSP naïf, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<"\n";
   S=SSP(T,TSP,F,n);
-  cout<<S<<endl;
+  //cout<<S<<endl;
+  */
+
+  //Execution du TSP_DP sans backtracking (taille du plus long chemin seulement)
+   /*
+  t=clock();
+  int z=TSP_DP1(T,n);
+  w=clock()-t;
+  cout<<"fin de l'éxécution du TSP_DP1, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<"\n";
+  */
+
+  //Execution du TSP_DP avec backtracking
+  t=clock();
+  TSP=TSP_DP2(T,n);
+  w=clock()-t;
+  cout<<"fin de l'éxécution du TSP_DP2, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<"\n";
+  
+
+  //cout<<"SSP avec TSP naïf : "<<endl<<S<<endl;
+  cout<<"SSP avec TSP_DP : "<<endl<<SSP(T,TSP,F,n)<<endl;
+  //cout<<"taille max : "<<SSP_int(T,TSP,F,n)<<endl;
+  // cout<<"taille max avec TSP_DP1 : "<<z<<endl;
+}
+
+void iter(int ens, int nextelement, vector<vector<int> > &T, int n, int size_set){
+  // cout<<"ens :"<<ens<<", nextelement :"<<nextelement<<", n"<<n<<", size_set :"<<size_set<<endl;
+  if(nextelement<n){
+    int enst=ens+(1<<nextelement);
+    T[size_set].push_back(enst);
+    iter(enst, nextelement+1,T,n,size_set+1);
+    iter(ens, nextelement+1,T,n,size_set);
+  }
+}
+  
+
+
+void test_rpz(){
+  /* int n,ens=0;
+  bool b;
+  cout<<"entrez la taille de votre ensemble :"<<endl;
+  cin>>n;
+  for(int i=0; i<n; i++){
+    cout<<i<<" est-il dans votre ensemble ?"<<endl;
+    cin>>b;
+    ens+=b?1<<i:0;
+  }
+  for(int i=0; i<n; i++){
+    cout<<i<<((ens>>i)&1?"est":"n'est pas")<<" dans votre ensemble"<<endl;
+    }*/
+  int n;
+  cout<<"entrez la taille de votre ensemble :"<<endl;
+  cin>>n;
+  vector<vector<int> > T(n);
+  iter(0,0,T,n,0);
+  cout<<"Affichage de tous les sous-ensemble (codé) :"<<endl;
+  for(int i=0;i<n;i++){
+    for(int j=0; j<T[i].size();j++)
+      cout<<T[i][j]<<' ';
+    cout<<endl;
+  }
+
 }
   
