@@ -7,17 +7,17 @@
 
 using namespace std;
 
-void afficheMatrice(vector<vector<int> >, int);
-void afficheMatrice_dot(vector<vector<int> >, int, vector<string>, string);
+void afficheMatrice(int**, int);
+void afficheMatrice_dot(int**, int, string*, string);
 int overlap(string, string);
 int overlap_naif(string, string);
-void overlap_graph_naif(vector<string>&, int&, vector<vector<int> >&);
-void overlap_graph(vector<string>&, int&, vector<vector<int> >&);
-vector<int> TSP_naif(vector<vector<int> >&, int);
-string SSP(vector<vector<int> >&,vector<int>&, vector<string>&, int);
-int SSP_int(vector<vector<int> >&,vector<int>&, vector<string>&, int);
-int TSP_DP1(vector<vector<int> >&, int);
-vector<int> TSP_DP2(vector<vector<int> >&, int);
+void overlap_graph_naif(string*&, int&, int**&);
+void overlap_graph(string*&, int&, int**&);
+int* TSP_naif(int**&, int);
+string SSP(int**&,int*&, string*&, int);
+int SSP_int(int**&,int*&, string*&, int);
+int TSP_DP1(int**&, int);
+int* TSP_DP2(int**&, int);
 void test_1();
 void test_2();
 void test_rpz();
@@ -35,23 +35,23 @@ int main(int argc, char** argv){
 }
 
 void test_1(){
-    vector<string> F;
-  F.push_back("ACCTGAG");
-  F.push_back("CAAT");
-  F.push_back("TGCATTGC");
-  F.push_back("GCAGACC");
-  F.push_back("CAAT");
-  F.push_back("AGCAAT");
-  F.push_back("CAAT");
+  string* F=new string[7];
+  F[0]="ACCTGAG";
+  F[1]="CAAT";
+  F[2]="TGCATTGC";
+  F[3]="GCAGACC";
+  F[4]="CAAT";
+  F[5]="AGCAAT";
+  F[6]="CAAT";
   
-  int n=F.size();
-  vector<vector<int> > T(n);
+  int n=7;
+  int** T=new int*[n];
   for(int i=0; i<n; i++)
-    T[i]=vector<int>(n);
+    T[i]=new int[n];
   overlap_graph(F,n,T);
   afficheMatrice(T,n);
   //afficheMatrice_dot(T,n,F,"graph.dot");
-  vector<int> TSP;
+  int* TSP=new int[n];
   string S;
    TSP=TSP_naif(T,n);
   S=SSP(T,TSP,F,n);
@@ -72,7 +72,7 @@ void test_2(){
   cin>>inf;
   cout<<"entrez la taille maximale de la chaine de caractère :"<<endl;
   cin>>sup;
-  vector<string> F(n);
+  string* F=new string[n];
   t=clock();
   for(i=0; i<n; i++){
     tn=(rand()%(sup-inf+1))+inf;
@@ -95,9 +95,9 @@ void test_2(){
   cout<<F[i]<<' '<<endl;
   
   //création du graphe de chevauchement T à partir de F :
-  vector<vector<int> > T(n);
+  int** T=new int*[n];
   for(int i=0; i<n; i++)
-    T[i]=vector<int>(n);
+    T[i]=new int[n];
   t=clock();
     overlap_graph(F,n,T);
   w=clock()-t;
@@ -106,10 +106,10 @@ void test_2(){
   afficheMatrice(T,n);
   // afficheMatrice_dot(T,n,F,"graph.dot");
 
-  vector<int> TSP;
-  
+  int* TSP=new int[n];
+  /*
   //Execution du TSP naïf sur la grahe T 
-   /*   t=clock();
+   t=clock();
   TSP=TSP_naif(T,n);
   w=clock()-t;
   cout<<"fin de l'éxécution du TSP naïf, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<"\n";
@@ -130,7 +130,7 @@ void test_2(){
   TSP=TSP_DP2(T,n);
   w=clock()-t;
   cout<<"fin de l'éxécution du TSP_DP2, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<"\n";
-  
+
 
   //cout<<"SSP avec TSP naïf : "<<endl<<S<<endl;
   cout<<"SSP avec TSP_DP : "<<endl<<SSP(T,TSP,F,n)<<endl;
