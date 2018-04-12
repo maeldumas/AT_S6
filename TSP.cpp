@@ -5,8 +5,9 @@
 
 using namespace std;
 
-vector<int> TSP_naif(vector<vector<int> > &T, int n){
-  vector<int> permutation(n),permutationMax(n);
+int* TSP_naif(int** &T, int n){
+  vector<int> permutation(n); //utiliser un int* ?
+  int* permutationMax=new int[n];
   int max=0,tmax,i;
   for(int i=0; i<n; i++){
     permutation[i]=i;
@@ -29,7 +30,7 @@ vector<int> TSP_naif(vector<vector<int> > &T, int n){
 }
 	      
    
-string SSP(vector<vector<int> > &T,vector<int> &TSP, vector<string> &F, int n){
+string SSP(int** &T,int* &TSP, string* &F, int n){
   string S=F[TSP[0]];
   for(int i=1;i<n;i++){
     S+=F[TSP[i]].substr(T[TSP[i-1]][TSP[i]]);
@@ -37,7 +38,7 @@ string SSP(vector<vector<int> > &T,vector<int> &TSP, vector<string> &F, int n){
   return S;
 }
 
-int SSP_int(vector<vector<int> > &T,vector<int> &TSP, vector<string> &F, int n){
+int SSP_int(int** &T,int* &TSP, string* &F, int n){
   int S=0;
   for(int i=1;i<n;i++){
     S+=T[TSP[i-1]][TSP[i]];
@@ -45,7 +46,7 @@ int SSP_int(vector<vector<int> > &T,vector<int> &TSP, vector<string> &F, int n){
   return S;
 }
 
-int TSP_DP1(vector<vector<int> > &T, int n){
+int TSP_DP1(int** &T, int n){
   int size=1<<n, k, m, set, tmax, mk;
   int** M=new int*[size];
   M[0]=new int[n];
@@ -77,11 +78,15 @@ int TSP_DP1(vector<vector<int> > &T, int n){
       tmax=M[size-1][k];
     }
   }
+  for(k=0;k<size;k++){
+    delete[] M[k];
+  }
+  delete[] M;
   return tmax;
 }
       
 
-vector<int> TSP_DP2(vector<vector<int> > &T, int n){ 
+int* TSP_DP2(int** &T, int n){ 
   int size=1<<n, k, m, set, tmax, mk, i;
   int** M=new int*[size];
   M[0]=new int[n];
@@ -105,12 +110,11 @@ vector<int> TSP_DP2(vector<vector<int> > &T, int n){
 	}
       }
     }
-    
   }
   //calcul du chemin maximal
   tmax=0,set=size-1;
   int pos=-1, nextpos; 
-  vector<int> MaxPath(n);
+  int* MaxPath=new int[n];
   for(k=0; k<n;k++){
     if(tmax<M[set][k]){
       tmax=M[set][k];
@@ -131,6 +135,10 @@ vector<int> TSP_DP2(vector<vector<int> > &T, int n){
     tmax-=T[nextpos][pos];
     pos=nextpos;
   }
+  for(k=0;k<size;k++){
+    delete[] M[k];
+    }
+  delete[] M;
   return MaxPath;
 }
 

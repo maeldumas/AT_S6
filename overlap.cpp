@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void afficheMatrice(vector<vector<int> > T, int n){
+void afficheMatrice(int** T, int n){
   int i,j;
   for(i=0; i<n; i++){
     for(j=0; j<n; j++){
@@ -17,9 +17,9 @@ void afficheMatrice(vector<vector<int> > T, int n){
   }
 }
 
-void afficheMatrice_dot(vector<vector<int> > T, int n, vector<string> F, string filename){
+void afficheMatrice_dot(int** T, int n, string* F, string filename){
   ofstream output;                           
-  output.open(filename,ios::out);
+  output.open(filename.c_str());
   output<<"digraph G{"<<endl;
   for(int i=0; i<n; i++){
     output<<i<<"[label="<<F[i]<<"];"<<endl;
@@ -79,7 +79,7 @@ int overlap(string s1, string s2){
 }
 
 //version naïve qui ne va pas supprimer les sommets entièrement recouvert par un autre sommet
-void overlap_graph_naif(vector<string> &F, int &n, vector<vector<int> > &T){
+void overlap_graph_naif(string* &F, int &n, int** &T){
   for(int i=0; i<n; i++){
     for(int j=0; j<n; j++){
       if(i==j)
@@ -91,9 +91,9 @@ void overlap_graph_naif(vector<string> &F, int &n, vector<vector<int> > &T){
   }
 }
 //version qui va supprimer les sommets entièrement recouvert par d'autres sommets
-void overlap_graph(vector<string> &F, int &n, vector<vector<int> > &T){
+void overlap_graph(string* &F, int &n, int** &T){
   int i,j,nt,it,jt;
-  vector<bool> overlaped(n);
+  bool overlaped[n];
   for(i=0; i<n; i++)
     overlaped[i]=false;
   for(i=0; i<n; i++){
