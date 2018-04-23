@@ -7,3 +7,6 @@ Pour l'implémentation du glouton, pense que ce que tu introduis dans la mise à
 Sinon, un requis de ton algorithme, c'est qu'il renvoie un int*, car c'est ce que prends en paramètre la construction de la chaîne. Si tu as du temps, tu peux faire une méthode qui transforme une matrice d'adjacence en liste d'adjacences
 
 J'ai fait cette classe, mais tu es totalement libre de ne pas l'utilisé, tu peux utiliser la librairie boost où tu as déjà beaucoup de choses impléenté sur les graphes.
+
+
+Petite note : j'ai pull ce que j'ai fait ces derniers jours sur le dynamique dans le master. donc tu peux aller, voir, c'est proche de ce qu'on rendra aux profs je pense.
