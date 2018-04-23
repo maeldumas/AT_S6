@@ -1,6 +1,5 @@
 #include<iostream>
 #include"triplet.h"
-#include"liste_adjacences.h"
 
 using namespace std;
 /*
