@@ -1,0 +1,9 @@
+Du coup, j'ai créé une structure, je pense que tu devrais avoir ce qu'il te faut, si ce n'est pas le cas, libre à toi d'ajouter des méthodes.
+Il y a un makefile et le main te montre un peu comment utiliser la classe, mais ça s'utilise comme une liste.
+J'ai fait le tri, normalement il marche bien, mais je l'ai test vite fait sans essayer de le casser, donc tu aura peut-être des problèmes...
+
+Pour l'implémentation du glouton, pense que ce que tu introduis dans la mise à jours est un tableau [n][2] (là où tu vas noter les début et fin pour tout ce qui est vérficiation sur les cycles)
+
+Sinon, un requis de ton algorithme, c'est qu'il renvoie un int*, car c'est ce que prends en paramètre la construction de la chaîne. Si tu as du temps, tu peux faire une méthode qui transforme une matrice d'adjacence en liste d'adjacences
+
+J'ai fait cette classe, mais tu es totalement libre de ne pas l'utilisé, tu peux utiliser la librairie boost où tu as déjà beaucoup de choses impléenté sur les graphes.
