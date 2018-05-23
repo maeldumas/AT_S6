@@ -1,2 +1,8 @@
 # Algo_texte
-Shortest String Problem, using overlap graph and TSP in dynamic programmation
+Anaïs Barthoulot, Maël Dumas
+
+Shortest String Problem.
+Résolution exacte du SSP en programmation dynamique (algorithme Held-Karp).
+
+Compiler avec : make
+Exécuter avec : ./ssp
