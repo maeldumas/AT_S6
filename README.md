@@ -2,7 +2,7 @@
 Anaïs Barthoulot, Maël Dumas
 
 Shortest String Problem.
-Résolution exacte du SSP en programmation dynamique (algorithme Held-Karp).
+Résolution exacte du SSP en programmation dynamique (algorithme Held-Karp) en c++.
 
-Compiler avec : make
+Compiler avec : make 
 Exécuter avec : ./ssp
