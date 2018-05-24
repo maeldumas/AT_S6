@@ -134,7 +134,7 @@ void test_SSP(string* &F, int n, bool affichage){
   overlap_graph(F,n,T);
   w=clock()-t;
   if(affichage){
-    cout<<"fin de la création du graphe de chevauchement, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
+    cout<<"fin de la création du graphe de chevauchement, elle a duré : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
     afficheMatrice(T,n);
   }
   cout<<"Le graphe de chevauchement est de taille : "<<n<<endl;
@@ -149,7 +149,7 @@ void test_SSP(string* &F, int n, bool affichage){
     t=clock();
     TSP=TSP_naif(T,n);
     w=clock()-t;
-    cout<<"fin de l'exécution du TSP naïf, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
+    cout<<"fin de l'exécution du TSP naïf, elle a duré : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
     if(affichage) cout<<"SSP avec TSP naïf : "<<endl<<SSP(T,TSP,F,n)<<endl<<endl;;
     delete[] TSP;
   }
@@ -164,7 +164,7 @@ void test_SSP(string* &F, int n, bool affichage){
     t=clock();
     TSP=TSP_DP_v2(T,n);
     w=clock()-t;
-    cout<<"fin de l'exécution du TSP_DP_v2, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
+    cout<<"fin de l'exécution du TSP_DP_v2, elle a duré : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
     if(affichage)
       cout<<"SSP avec TSP_DP_v2 : "<<endl<<SSP(T,TSP,F,n)<<endl<<endl;
     delete[] TSP;
@@ -179,7 +179,7 @@ void test_SSP(string* &F, int n, bool affichage){
     t=clock();
     int res=TSP_DP_vsb(T,n);
     w=clock()-t;
-    cout<<"fin de l'exécution du TSP_DP_vsb, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
+    cout<<"fin de l'exécution du TSP_DP_vsb, elle a duré : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
     if(affichage)
       cout<<"Poids du chemin avec TSP_DP_vsb : "<<res<<endl;
     else
@@ -243,7 +243,7 @@ void test_u(){
   x=clock();
   overlap_graph(F,n,T);
   w=clock()-x;
-  cout<<"fin de la création du graphe de chevauchement, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
+  cout<<"fin de la création du graphe de chevauchement, elle a duré : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
   afficheMatrice(T,n);
   cout<<"Le graphe de chevauchement est de taille : "<<n<<endl;
   cout<<endl;
@@ -251,7 +251,7 @@ void test_u(){
   x=clock();
   int* TSP=TSP_DP_v2(T,n);
   w=clock()-x;
-  cout<<"fin de l'exécution du TSP_DP_v2, elle a durée : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
+  cout<<"fin de l'exécution du TSP_DP_v2, elle a duré : "<<((float)w)/CLOCKS_PER_SEC<<"s"<<endl;
   cout<<"SSP avec TSP_DP_v2 : "<<endl<<SSP(T,TSP,F,n)<<endl<<endl;
 
 
